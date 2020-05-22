@@ -17,7 +17,7 @@ namespace TakeTwo.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Administrator,Staff")]
         [HttpGet]
         public ActionResult Create(PostViewModel model)
         {

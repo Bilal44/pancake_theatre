@@ -7,6 +7,7 @@ using TakeTwo.Models;
 
 namespace TakeTwo.Controllers
 {
+    [Authorize(Roles = "Administrator")] //Only allow Admins to access the Admin Controller! :)
     public class AdminController : BaseController
     {
         // GET: Admin
