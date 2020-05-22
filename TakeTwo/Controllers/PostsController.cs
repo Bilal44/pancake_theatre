@@ -91,6 +91,16 @@ namespace TakeTwo.Controllers
             return View(model);
         }
 
+        public ActionResult Delete(int id)
+        {
+            Post post = db.Posts.Find(id);
+
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            
+            return RedirectToAction("Index", "Home");
+        }
+
 
 
     }
