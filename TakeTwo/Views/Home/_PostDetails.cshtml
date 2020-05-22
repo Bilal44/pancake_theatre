@@ -11,17 +11,17 @@
     <ul>
         @foreach (var comment in Model.Comments)
         {
-        <li>
-            @comment.Text
-            @if (comment.Author != null)
-            {
-                @: (by @comment.Author)
+            <li>
+                @comment.Text
+                @if (comment.Author != null)
+                {
+                    @: (by @comment.Author)
 
-            }
-            @if (User.IsInRole("Administrator"))
-            {
-                @Html.ActionLink("Delete Comment", "Delete", "Comment", new { id = comment.CommentId }, new { @class = "btn btn-primary btn-xs" })
-            }
+                }
+                @if (User.IsInRole("Administrator"))
+                {
+                    @Html.ActionLink("Delete Comment", "Delete", "Comment", new { id = comment.CommentId }, new { @class = "btn btn-primary btn-xs", onclick = "return confirm('Are you sure?');" })
+                }
             </li>
         }
     </ul>
@@ -36,18 +36,10 @@ else
     @Html.ActionLink("Edit", "Edit", "Posts", new { id = Model.Id },
          new { @class = "btn btn-primary btn-sm" })
 
-<span ="delButton">
+    <span></span>
     @Html.ActionLink("Delete", "Delete", "Posts", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm", onclick = "return confirm('Are you sure?');" })
-</span>
-    
 }
 
 
-    @Html.ActionLink("Comment", "CreateComment", "Comment", new { id = Model.Id },
-         new { @class = "btn btn-primary btn-sm" })
-
-
-<script>
-    let deleteButton = document.getElementsByClassName("delButton");
-   
-</script>
+@Html.ActionLink("Comment", "CreateComment", "Comment", new { id = Model.Id },
+     new { @class = "btn btn-primary btn-sm" })

@@ -44,21 +44,25 @@ namespace TakeTwo.Controllers
             return View();
         }
 
-        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View(db.Comments.Find(id));
-        }
+            Comment comment = db.Comments.Find(id);
 
-        [HttpPost]
-        [ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            db.Comments.Remove(db.Comments.Find(id));
+            db.Comments.Remove(comment);
             db.SaveChanges();
             this.AddNotification("Comment successfully delete :)", NotificationType.SUCCESS);
-            return this.RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
+
+        //[HttpPost]
+        //[ActionName("Delete")]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    db.Comments.Remove(db.Comments.Find(id));
+        //    db.SaveChanges();
+        //    this.AddNotification("Comment successfully delete :)", NotificationType.SUCCESS);
+        //    return this.RedirectToAction("Index", "Home");
+        //}
 
 
         // GET: Comment/Edit/5
