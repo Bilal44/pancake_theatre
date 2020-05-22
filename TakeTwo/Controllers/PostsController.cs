@@ -67,11 +67,14 @@ namespace TakeTwo.Controllers
             });
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Post post = db.Posts.Find(id);
+            return View(post);
+        }
 
-        //public ActionResult Edit()
-        //{
-
-        //}
+        
 
     }
 }
