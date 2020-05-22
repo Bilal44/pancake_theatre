@@ -42,29 +42,19 @@ namespace TakeTwo.Controllers
                 this.db.Posts.Add(p);
                 this.db.SaveChanges();
                 this.AddNotification("Post Created", NotificationType.INFO);
-                return this.RedirectToAction("My");
+                return this.RedirectToAction("UserPosts");
             }
             return this.View(model);
         }
 
         //GET Posts/My
-        public ActionResult My()
+        public ActionResult UserPosts()
         {
-            string currentUserId = this.User.Identity.GetUserId();
-            var posts = this.db.Posts.Where(p => p.AuthorId == currentUserId)
-                .OrderBy(p => p.CreatedAt)
-                .Select(PostViewModel.ViewModel);
+            string currentUserId = User.Identity.GetUserId();
+            var posts = db.Posts.Where(p => p.AuthorId == currentUserId)
+                .OrderBy(p => p.CreatedAt);
 
-            var announcements = posts.Where(p => p.Category == "Announcements");
-            var reviews = posts.Where(p => p.Category == "Reviews");
-            var other = posts.Where(p => p.Category == "Other");
-
-            return View(new PostCategoryViewModel()
-            {
-                Announcements = announcements,
-                Reviews = reviews,
-                Other = other
-            });
+            return View(posts);
         }
 
         [HttpGet]

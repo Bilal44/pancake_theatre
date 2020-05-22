@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,7 @@ namespace TakeTwo.Models
         }
 
         public int Id { get; set; }
+        [Display(Name = "Comment")]
         public string Text { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
