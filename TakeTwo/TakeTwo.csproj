@@ -183,6 +183,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentInputModel.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\PostCategoryViewModel.cs" />
     <Compile Include="Models\PostDetailsViewModel.cs" />
