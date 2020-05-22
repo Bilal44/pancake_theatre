@@ -35,9 +35,11 @@ else
 {
     @Html.ActionLink("Edit", "Edit", "Posts", new { id = Model.Id },
          new { @class = "btn btn-primary btn-sm" })
-    <span></span>
+
+<span ="delButton">
+    @Html.ActionLink("Delete", "Delete", "Posts", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm", onclick = "return confirm('Are you sure?');" })
+</span>
     
-    @Html.ActionLink("Delete", "Delete", "Posts", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
 }
 
 @if (User.Identity.IsAuthenticated)
@@ -45,3 +47,8 @@ else
     @Html.ActionLink("Comment", "CreateComment", "Comment", new { id = Model.Id },
          new { @class = "btn btn-primary btn-sm" })
 }
+
+<script>
+    let deleteButton = document.getElementsByClassName("delButton");
+   
+</script>
