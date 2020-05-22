@@ -35,8 +35,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Category, new List<SelectListItem> {
+                           new SelectListItem { Value = "Announcements" , Text = "Announcements" },
+                           new SelectListItem { Value = "Reviews" , Text = "Reviews" },
+                           new SelectListItem { Value = "Other" , Text = "Other" }
+                        },
+                      new { @class = "form-control" })
             </div>
         </div>
 

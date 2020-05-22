@@ -74,7 +74,24 @@ namespace TakeTwo.Controllers
             return View(post);
         }
 
-        
+        [HttpPost]
+        public ActionResult Edit(int id, PostInputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Post post = db.Posts.Find(id);
+                post.Title = model.Title;
+                post.Body = model.Body;
+                post.Category = model.Category;
+                post.IsApproved = false;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
+        }
+
+
 
     }
 }
