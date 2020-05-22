@@ -1,0 +1,23 @@
+﻿@model TakeTwo.Models.PostViewModel
+
+    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+        <div class="event-box">
+            <h2>@Model.Title</h2>
+            <span class="date">@Model.CreatedAt</span>
+            @if (Model.Author != null)
+            {
+                <div class="author">Author: @Model.Author</div>
+
+            }
+            <div class="author">Category: @Model.Category</div>
+        </div>
+        <div id="post-details-@Model.Id">
+            @Ajax.ActionLink("View Details >>", "PostDetailById", "Home",
+           new { id = Model.Id },
+           new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "post-details-" + Model.Id
+           }, new { @class = "btn btn-primary" })
+        </div>
+    </div>

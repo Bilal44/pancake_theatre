@@ -1,0 +1,46 @@
+﻿@model TakeTwo.Models.PostCategoryViewModel
+
+@section scripts{
+    @Scripts.Render("~/bundles/ajax")
+}
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<div class="row justify-content-center">
+    <h1>Announcements and Reviews</h1>
+</div>
+
+<div class="row">
+    @if (Model.Announcements.Any())
+    {
+        @Html.DisplayFor(x => x.Announcements)
+    }
+    else
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12">No Announcements</div>
+    }
+</div>
+
+<div class="row">
+    @if (Model.Reviews.Any())
+    {
+        @Html.DisplayFor(x => x.Reviews)
+    }
+    else
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12">No Reviews</div>
+    }
+</div>
+
+<div class="row">
+    @if (Model.Other.Any())
+    {
+        @Html.DisplayFor(x => x.Other)
+    }
+    else
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12">No Otherzzz</div>
+    }
+</div>

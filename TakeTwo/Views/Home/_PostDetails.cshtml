@@ -1,0 +1,47 @@
+﻿@model TakeTwo.Models.PostDetailsViewModel
+
+@if (Model.Body != null)
+{
+    <div class="description">Description: @Model.Body</div>
+}
+
+@if (Model.Comments.Any())
+{
+    @:Comments:
+    <ul>
+        @foreach (var comment in Model.Comments)
+        {
+        <li>
+            @comment.Text
+            @if (comment.Author != null)
+            {
+                @: (by @comment.Author)
+
+            }
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Delete Comment", "Delete", "Comment", new { id = comment.CommentId }, new { @class = "btn btn-primary btn-xs" })
+            }
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No comments to display</p>
+}
+
+@if (ViewBag.CanEdit)
+{
+    @Html.ActionLink("Edit", "Edit", "Posts", new { id = Model.Id },
+         new { @class = "btn btn-primary btn-sm" })
+    <span></span>
+    
+    @Html.ActionLink("Delete", "Delete", "Posts", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Comment", "CreateComment", "Comment", new { id = Model.Id },
+         new { @class = "btn btn-primary btn-sm" })
+}
