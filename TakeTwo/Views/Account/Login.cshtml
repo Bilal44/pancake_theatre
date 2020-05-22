@@ -5,17 +5,17 @@
 }
 
 <div class="row">
-<h2>Enter your details</h2>
-                <h4>Mr Pancake will try to find you in the database</h4>
-                <hr />
+    <h2>Enter your details to Login</h2>
+    <h4>Mr Pancake will try to find you in the database</h4>
+    <hr />
     <div class="col-md-6">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="form-group" style="margin-top:25px">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label mt-4" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -42,8 +42,8 @@
                     </div>
                 </div>
                 @*<p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>*@
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>*@
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
