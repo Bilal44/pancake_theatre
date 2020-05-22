@@ -30,7 +30,15 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsSuspended)
+                @*@Html.DisplayFor(modelItem => item.IsApproved)*@
+                @if (item.IsSuspended)
+                {
+                    @Html.ActionLink("Unsuspend User", "UnsuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                }
+                else
+                {
+                    @Html.ActionLink("Suspend User", "SuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                }
             </td>
 
             <td>
