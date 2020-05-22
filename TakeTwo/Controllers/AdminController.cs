@@ -84,5 +84,23 @@ namespace TakeTwo.Controllers
             db.SaveChanges(); //Save db
             return RedirectToAction("ViewAllPosts"); //Rerender page
         }
+
+        
+        public ActionResult SuspendUser(string id)
+        {
+            User user = db.Users.Find(id);
+            user.IsSuspended = true;
+            db.SaveChanges();
+            return RedirectToAction("ViewAllUsers");
+        }
+
+        public ActionResult UnsuspendUser(string id)
+        {
+            User user = db.Users.Find(id);
+            user.IsSuspended = false;
+            db.SaveChanges();
+            return RedirectToAction("ViewAllUsers");
+        }
+
     }
 }
