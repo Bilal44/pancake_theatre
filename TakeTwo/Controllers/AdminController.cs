@@ -90,6 +90,8 @@ namespace TakeTwo.Controllers
         {
             User user = db.Users.Find(id);
             user.IsSuspended = true;
+            user.LockoutEnabled = true;
+            user.LockoutEndDateUtc = DateTime.Now.AddDays(1); //suspend the user for 1 day
             db.SaveChanges();
             return RedirectToAction("ViewAllUsers");
         }
@@ -98,6 +100,8 @@ namespace TakeTwo.Controllers
         {
             User user = db.Users.Find(id);
             user.IsSuspended = false;
+            user.LockoutEnabled = false;
+            user.LockoutEndDateUtc = DateTime.Now; //Ends the user lockout
             db.SaveChanges();
             return RedirectToAction("ViewAllUsers");
         }
