@@ -259,6 +259,7 @@
     <Content Include="Views\Comment\Delete.cshtml" />
     <Content Include="Views\Comment\CreateComment.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ViewAllUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
