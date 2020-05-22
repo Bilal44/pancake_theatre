@@ -8,9 +8,14 @@
     ViewBag.Title = "Posts";
 }
 
+<h1 class="text-center">Welcome to the Pancake Theatre Company!</h1>
+<img id="jail" alt="jail" width=50% class="center-block" src="@Url.Content("~/Content/pancakesocial.png")" />
+
 <div class="row justify-content-center">
-    <h1>Announcements and Reviews</h1>
+    <h2 class="">Announcements and Reviews</h2>
 </div>
+
+
 
 <div class="row">
     @if (Model.Announcements.Any())
