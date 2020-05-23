@@ -68,5 +68,20 @@ namespace TakeTwo.Controllers
             return RedirectToAction("ViewAllUsers");
         }
 
+        [HttpGet]
+        public ActionResult UpdateRole(string id)
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult UpdateRole(string id)
+        //{
+        //    User user = db.Users.Find(id);
+        //    user.CurrentRole = "Administrator";
+        //    db.SaveChanges();
+        //    return RedirectToAction("ViewAllUsers");
+        //}
+
     }
 }

@@ -18,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.IsSuspended)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentRole);
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -38,6 +41,9 @@
                 {
                     @Html.ActionLink("Suspend User", "SuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentRole)
             </td>
         </tr>
     }

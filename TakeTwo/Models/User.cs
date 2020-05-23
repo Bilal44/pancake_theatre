@@ -35,11 +35,17 @@ namespace TakeTwo.Models
             {
                 if (userManager == null)
                 {
-                    //userManager = HttpContext.Current.GetOwinContext().GetUserManager<>();
-
+                    userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                    return userManager.GetRoles(Id).First();
                 }
-
-                return userManager.GetRoles(Id).Single();
+                else
+                {
+                    return userManager.GetRoles(Id).First();
+                }
+            }
+            set
+            {
+                CurrentRole = value;
             }
         }
 
@@ -53,5 +59,5 @@ namespace TakeTwo.Models
         }
     }
 
-    
+
 }
