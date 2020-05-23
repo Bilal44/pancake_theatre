@@ -4,6 +4,7 @@
     ViewBag.Title = "ViewAllUsers";
 }
 
+<img alt="A pancake shaking hands with a popsicle" width="300" class="center-block" src="@Url.Content("~/Content/pancakeconnect.png")" />
 <h2>Theater Company Users</h2>
 
 <table class="table">
@@ -17,7 +18,6 @@
         <th>
             @Html.DisplayNameFor(model => model.IsSuspended)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -30,7 +30,6 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.IsApproved)*@
                 @if (item.IsSuspended)
                 {
                     @Html.ActionLink("Unsuspend User", "UnsuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
@@ -39,11 +38,6 @@
                 {
                     @Html.ActionLink("Suspend User", "SuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
-            </td>
-
-            <td>
-                @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
             </td>
         </tr>
     }

@@ -13,13 +13,13 @@ namespace TakeTwo.Controllers
     public class PostsController : BaseController
     {
         [HttpGet]
-        public ActionResult Create(PostViewModel model)
+        public ActionResult CreatePost(PostViewModel model)
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(PostInputModel model)
+        public ActionResult CreatePost(PostInputModel model)
         {
             if (model != null && ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace TakeTwo.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult EditPost(int id)
         {
             Post post = db.Posts.Find(id);
 
@@ -61,7 +61,7 @@ namespace TakeTwo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, PostInputModel model)
+        public ActionResult EditPost(int id, PostInputModel model)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace TakeTwo.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult DeletePost(int id)
         {
             Post post = db.Posts.Find(id);
 

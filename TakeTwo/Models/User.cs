@@ -18,9 +18,10 @@ namespace TakeTwo.Models
 
 
         [Required]
-        [Display(Name = "Full Name")]
+        [Display(Name = "Name")]
         public string FullName { get; set; }
         [Required]
+        [Display(Name = "Is Suspended")]
         public bool IsSuspended { get; set; }
 
 

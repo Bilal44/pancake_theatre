@@ -43,24 +43,6 @@ namespace TakeTwo.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public ActionResult DeleteUser(string id)
-        {
-            User user = db.Users.Find(id);
-
-            return View(user);
-        }
-
-        [HttpPost, ActionName("DeleteUser")]
-        public ActionResult DeleteUserPost(string id)
-        {
-            User user = db.Users.Find(id);
-
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         public ActionResult ViewAllPosts()
         {
             var posts = db.Posts;

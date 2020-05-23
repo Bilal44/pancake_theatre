@@ -22,24 +22,27 @@ namespace TakeTwo.Controllers
         public ActionResult CreateComment(int id, CommentInputModel model)
         {
 
-            if (model != null && this.ModelState.IsValid)
+            if (model != null && ModelState.IsValid)
             {
                 var c = new Comment()
                 {
                     Text = model.Text,
                     PostId = id,
-                    AuthorId = this.User.Identity.GetUserId(),
+                    AuthorId = User.Identity.GetUserId(),
                 };
 
-                this.db.Comments.Add(c);
-                this.db.SaveChanges();
-                this.AddNotification("Comment made", NotificationType.SUCCESS);
-                return this.RedirectToAction("Index", "Home");
+                db.Comments.Add(c);
+                db.SaveChanges();
+
+                this.AddNotification("Comment posted", NotificationType.SUCCESS);
+
+                return RedirectToAction("Index", "Home");
             }
+
             return View();
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult DeleteComment(int id)
         {
             Comment comment = db.Comments.Find(id);
 
@@ -47,29 +50,6 @@ namespace TakeTwo.Controllers
             db.SaveChanges();
             this.AddNotification("Comment successfully delete :)", NotificationType.SUCCESS);
             return RedirectToAction("Index", "Home");
-        }
-
-
-        // GET: Comment/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Comment/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

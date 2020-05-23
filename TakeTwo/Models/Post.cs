@@ -21,7 +21,9 @@ namespace TakeTwo.Models
         [MaxLength(200)]
         public string Title { get; set; }
         public string Body { get; set; }
+        [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; }
+        [Display(Name = "Updated At")]
         public DateTime UpdatedAt { get; set; }
 
         public string AuthorId { get; set; }

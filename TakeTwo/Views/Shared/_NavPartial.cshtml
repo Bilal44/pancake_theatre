@@ -1,0 +1,12 @@
+﻿<ul class="nav navbar-nav">
+
+    @if (User.IsInRole("Staff") || User.IsInRole("Administrator"))
+    {
+        <li>@Html.ActionLink("My Posts", "UserPosts", "Posts")</li>
+        <li>@Html.ActionLink("Create Post", "CreatePost", "Posts")</li>
+    }
+    @if (User.IsInRole("Administrator"))
+    {
+        <li>@Html.ActionLink("Admin Dashboard", "Index", "Admin")</li>
+    }
+</ul>

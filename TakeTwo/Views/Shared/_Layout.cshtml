@@ -20,18 +20,7 @@
                 @Html.ActionLink("Pancake Theatre Company", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("My Posts", "UserPosts", "Posts")</li>
-
-                    @if (User.IsInRole("Staff") || User.IsInRole("Administrator"))
-                    {
-                        <li>@Html.ActionLink("Create Post", "Create", "Posts")</li>
-                    }
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <li>@Html.ActionLink("Admin Dashboard", "Index", "Admin")</li>
-                    }
-                </ul>
+                @Html.Partial("_NavPartial")
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

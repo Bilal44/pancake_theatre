@@ -4,11 +4,9 @@
     ViewBag.Title = "ViewAllPosts";
 }
 
-<h2>ViewAllPosts</h2>
+<img alt="A pancake shaking hands with a popsicle" width="300" class="center-block" src="@Url.Content("~/Content/pancakelove.png")" />
+<h2>Viewing All Pancake Posts</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -29,47 +27,45 @@
         <th>
             @Html.DisplayNameFor(model => model.Category)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsApproved)
-        </th>
+        <th></th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.IsApproved)*@
-            @if (item.IsApproved)
-            {
-                @Html.ActionLink("Disable Post", "DisablePost", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
-            }
-            else
-            {
-                @Html.ActionLink("Approve Post", "ApprovePost", "Admin", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-info btn-xs", onclick = "return confirm('Are you sure?');" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @if (item.IsApproved)
+                {
+                    @Html.ActionLink("Disable Post", "DisablePost", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                }
+                else
+                {
+                    @Html.ActionLink("Approve Post", "ApprovePost", "Admin", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-info btn-xs", onclick = "return confirm('Are you sure?');" })
+            </td>
+        </tr>
+    }
 
 </table>
