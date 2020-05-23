@@ -16,29 +16,35 @@ namespace TakeTwo.Models
             //Seed initial data only if the database is empty
             if (!context.Users.Any())
             {
-                var adminEmail = "admin@admin.com";
+                var adminEmail = "admin@pancake.com";
                 var adminUserName = adminEmail;
                 var adminFullName = "System Admin";
                 var adminPassword = adminEmail;
                 string adminRole = "Administrator";
 
 
-                var staffEmail = "staff@staff.com";
+                var staffEmail = "staff@pancake.com";
                 var staffUserName = staffEmail;
-                var staffFullName = "Mr Staff";
+                var staffFullName = "Pancake Staff";
                 var staffPassword = staffEmail;
                 string staffRole = "Staff";
 
-                var customerEmail = "customer@customer.com";
+                var customerEmail = "manager@pancake.com";
                 var customerUserName = customerEmail;
-                var customerFullName = "Mr Customer";
+                var customerFullName = "Pancake Manager";
                 var customerPassword = customerEmail;
-                string customerRole = "Customer";
+                string customerRole = "Staff";
 
+                var suspendedEmail = "suspended@pancake.com";
+                var suspendedUserName = suspendedEmail;
+                var suspendedFullName = "Naughty Boy";
+                var suspendedPassword = suspendedEmail;
+                string suspendedRole = "Staff";
 
                 CreateAdminUser(context, adminEmail, adminUserName, adminFullName, adminPassword, adminRole);
                 CreateStaffUser(context, staffEmail, staffUserName, staffFullName, staffPassword, staffRole);
-                CreateCustomerUser(context, customerEmail, customerUserName, customerFullName, customerPassword, customerRole);
+                CreateStaffUser(context, customerEmail, customerUserName, customerFullName, customerPassword, customerRole);
+                CreateSuspendedUser(context, suspendedEmail, suspendedUserName, suspendedFullName, suspendedPassword, suspendedRole);
                 CreateSeveralPosts(context);
                 context.SaveChanges();
             }
@@ -184,10 +190,13 @@ namespace TakeTwo.Models
 
             //Create the staff role
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var roleCreateResult = roleManager.Create(new IdentityRole(staffRole));
-            if (!roleCreateResult.Succeeded)
-            {
-                throw new Exception(string.Join("; ", roleCreateResult.Errors));
+
+            if (!roleManager.RoleExists(staffRole)) {
+                var roleCreateResult = roleManager.Create(new IdentityRole(staffRole));
+                if (!roleCreateResult.Succeeded)
+                {
+                    throw new Exception(string.Join("; ", roleCreateResult.Errors));
+                } 
             }
 
             //Add the staff user to the staff role
@@ -197,14 +206,16 @@ namespace TakeTwo.Models
                 throw new Exception(string.Join("; ", addStaffRoleResult.Errors));
             }
         }
-        public void CreateCustomerUser(ApplicationDbContext context, string customerEmail, string customerUserName, string customerFullName, string customerPassword, string customerRole)
+        public void CreateSuspendedUser(ApplicationDbContext context, string customerEmail, string customerUserName, string customerFullName, string customerPassword, string customerRole)
         {
             var customerUser = new User
             {
                 UserName = customerUserName,
                 FullName = customerFullName,
                 Email = customerEmail,
-                IsSuspended = false
+                LockoutEndDateUtc = DateTime.Now.AddDays(1),
+                LockoutEnabled = true,
+                IsSuspended = true             
             };
             var userStore = new UserStore<User>(context);
             var userManager = new UserManager<User>(userStore);
@@ -224,10 +235,14 @@ namespace TakeTwo.Models
 
             //Create the customer role
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var roleCreateResult = roleManager.Create(new IdentityRole(customerRole));
-            if (!roleCreateResult.Succeeded)
+
+            if (!roleManager.RoleExists(customerRole))
             {
-                throw new Exception(string.Join("; ", roleCreateResult.Errors));
+                var roleCreateResult = roleManager.Create(new IdentityRole(customerRole));
+                if (!roleCreateResult.Succeeded)
+                {
+                    throw new Exception(string.Join("; ", roleCreateResult.Errors));
+                }
             }
 
             //Add the customer user to the customer role
