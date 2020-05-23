@@ -9,27 +9,19 @@ using TakeTwo.Models;
 
 namespace TakeTwo.Controllers
 {
-    //[Authorize] 
+    [Authorize(Roles = "Administrator,Staff")]
     public class PostsController : BaseController
     {
-        // GET: Posts
-        public ActionResult Index()
-        {
-            return View();
-        }
-        [Authorize(Roles = "Administrator,Staff")]
         [HttpGet]
         public ActionResult Create(PostViewModel model)
         {
             return View();
         }
 
-        //GET: Posts/Create
-        [Authorize(Roles = "Administrator,Staff")]
         [HttpPost]
         public ActionResult Create(PostInputModel model)
         {
-            if (model != null && this.ModelState.IsValid)
+            if (model != null && ModelState.IsValid)
             {
                 var p = new Post()
                 {
@@ -39,15 +31,18 @@ namespace TakeTwo.Controllers
                     Category = model.Category,
                     IsApproved = model.IsApproved
                 };
-                this.db.Posts.Add(p);
-                this.db.SaveChanges();
-                this.AddNotification("Post Created", NotificationType.INFO);
-                return this.RedirectToAction("UserPosts");
+
+                db.Posts.Add(p);
+                db.SaveChanges();
+
+                this.AddNotification("Post submitted for Review", NotificationType.INFO);
+
+                return RedirectToAction("UserPosts");
             }
-            return this.View(model);
+
+            return View(model);
         }
 
-        //GET Posts/My
         public ActionResult UserPosts()
         {
             string currentUserId = User.Identity.GetUserId();
@@ -61,6 +56,7 @@ namespace TakeTwo.Controllers
         public ActionResult Edit(int id)
         {
             Post post = db.Posts.Find(id);
+
             return View(post);
         }
 
@@ -74,7 +70,11 @@ namespace TakeTwo.Controllers
                 post.Body = model.Body;
                 post.Category = model.Category;
                 post.IsApproved = false;
+
                 db.SaveChanges();
+
+                this.AddNotification("Edit submitted for Review", NotificationType.INFO);
+
                 return RedirectToAction("Index", "Home");
             }
 
@@ -87,7 +87,9 @@ namespace TakeTwo.Controllers
 
             db.Posts.Remove(post);
             db.SaveChanges();
-            
+
+            this.AddNotification("Post deleted :(", NotificationType.SUCCESS);
+
             return RedirectToAction("Index", "Home");
         }
 
