@@ -11,7 +11,7 @@ namespace TakeTwo.Controllers
     public class AdminController : BaseController
     {
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult AdminDashboard()
         {
             return View();
         }
@@ -21,27 +21,6 @@ namespace TakeTwo.Controllers
             return View(db.Users.ToList());
         }
 
-        [HttpGet]
-        public ActionResult EditUser(string id)
-        {
-            User user = db.Users.Find(id);
-
-            return View(user);
-        }
-
-        [HttpPost]
-        public ActionResult EditUser(string id, EditUserViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = db.Users.Find(id);
-                user.IsSuspended = model.IsSuspended;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(model);
-        }
 
         public ActionResult ViewAllPosts()
         {

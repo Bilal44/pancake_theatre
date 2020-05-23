@@ -11,7 +11,7 @@ using TakeTwo.Models;
 namespace TakeTwo.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -63,6 +63,7 @@ namespace TakeTwo.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
@@ -72,6 +73,29 @@ namespace TakeTwo.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditUser()
+        {
+            User user = db.Users.Find(User.Identity.GetUserId());
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var id = User.Identity.GetUserId();
+                User user = db.Users.Find(id);
+                user.FullName = model.FullName;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
             return View(model);
         }
 

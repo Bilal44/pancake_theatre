@@ -256,18 +256,17 @@
     <Content Include="Views\Posts\CreatePost.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Comment\CreateComment.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Admin\ViewAllUsers.cshtml" />
-    <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Admin\ViewAllPosts.cshtml" />
     <Content Include="Views\Posts\EditPost.cshtml" />
     <Content Include="Views\Posts\UserPosts.cshtml" />
     <Content Include="Views\Shared\_NavPartial.cshtml" />
     <Content Include="Views\Posts\NoPosts.cshtml" />
+    <Content Include="Views\Manage\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
