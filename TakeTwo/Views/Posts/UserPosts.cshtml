@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TakeTwo.Models.Post>
 
 @{
-    ViewBag.Title = "UserPosts";
+    ViewBag.Title = "My Posts";
 }
 
 <h2>My Posts</h2>
@@ -23,28 +23,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td class="text-center">
-            @Html.DisplayFor(modelItem => item.IsApproved)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditPost", new { id = item.Id }, new { @class = "btn btn-primary btn-xs", onclick = "return confirm('Any edited posts will have to be re-approved by the Admins');" })
-            <span></span>
-            @Html.ActionLink("Delete", "DeletePost", new { id = item.Id }, new { @class = "btn btn-info btn-xs", onclick = "return confirm('Are you sure?');" })
-        </td>
-        <td>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPost", new { id = item.Id }, new { @class = "btn btn-primary btn-xs", onclick = "return confirm('Any edited posts will have to be re-approved by the Admins');" })
+                <span></span>
+                @Html.ActionLink("Delete", "DeletePost", new { id = item.Id }, new { @class = "btn btn-info btn-xs", onclick = "return confirm('Are you sure?');" })
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
 
 </table>

@@ -48,8 +48,11 @@ namespace TakeTwo.Controllers
             string currentUserId = User.Identity.GetUserId();
             var posts = db.Posts.Where(p => p.AuthorId == currentUserId)
                 .OrderBy(p => p.CreatedAt);
-
-            return View(posts);
+            
+            if (posts.Any())
+                return View(posts); //If user has any posts then render them in UserPosts view
+            else
+                return RedirectToAction("NoPosts"); //Else user has no posts -> redirect to NoPosts view
         }
 
         [HttpGet]
@@ -93,6 +96,10 @@ namespace TakeTwo.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult NoPosts()
+        {
+            return View();
+        }
 
 
     }
