@@ -10,7 +10,7 @@ namespace TakeTwo.Models
     {
         public Post()
         {
-            this.IsApproved = true;
+            //this.IsApproved = true;
             this.CreatedAt = DateTime.Now;
             this.UpdatedAt = DateTime.Now;
             this.Comments = new HashSet<Comment>();
@@ -30,6 +30,7 @@ namespace TakeTwo.Models
 
         public string Category { get; set; }
 
+        [Display(Name = "Approved")]
         public bool IsApproved { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }

@@ -11,11 +11,6 @@ namespace TakeTwo.Controllers
 {
     public class CommentController : BaseController
     {
-        // GET: Comment
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
         public ActionResult CreateComment()
@@ -53,16 +48,6 @@ namespace TakeTwo.Controllers
             this.AddNotification("Comment successfully delete :)", NotificationType.SUCCESS);
             return RedirectToAction("Index", "Home");
         }
-
-        //[HttpPost]
-        //[ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    db.Comments.Remove(db.Comments.Find(id));
-        //    db.SaveChanges();
-        //    this.AddNotification("Comment successfully delete :)", NotificationType.SUCCESS);
-        //    return this.RedirectToAction("Index", "Home");
-        //}
 
 
         // GET: Comment/Edit/5
