@@ -21,6 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CurrentRole);
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -35,15 +36,18 @@
             <td>
                 @if (item.IsSuspended)
                 {
-                    @Html.ActionLink("Unsuspend User", "UnsuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Unsuspend User", "UpdateRole", "Admin", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
                 }
                 else
                 {
-                    @Html.ActionLink("Suspend User", "SuspendUser", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
+                    @Html.ActionLink("Suspend User", "UpdateRole", "Admin", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
                 }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CurrentRole)
+            </td>
+            <td>
+                @Html.ActionLink("Update Role", "UpdateRole", "Admin", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
             </td>
         </tr>
     }

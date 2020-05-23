@@ -71,17 +71,18 @@ namespace TakeTwo.Controllers
         [HttpGet]
         public ActionResult UpdateRole(string id)
         {
-            return View();
+            User user = db.Users.Find(id);
+            return View(user);
         }
 
-        //[HttpPost]
-        //public ActionResult UpdateRole(string id)
-        //{
-        //    User user = db.Users.Find(id);
-        //    user.CurrentRole = "Administrator";
-        //    db.SaveChanges();
-        //    return RedirectToAction("ViewAllUsers");
-        //}
+        [HttpPost]
+        public ActionResult UpdateRole(User model)
+        {
+            User user = db.Users.Find(model.Id);
+            user.CurrentRole = model.CurrentRole;
+            db.SaveChanges();
+            return RedirectToAction("ViewAllUsers");
+        }
 
     }
 }

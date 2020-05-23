@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -24,6 +26,9 @@ namespace TakeTwo.Models
         [Display(Name = "Is Suspended")]
         public bool IsSuspended { get; set; }
 
+        private readonly List<IRole> _roles;
+
+
 
         //the CurrentRole property is not mapped as a field in the Users table
         //i neeed it to get the current role that the user is logged in
@@ -36,11 +41,11 @@ namespace TakeTwo.Models
                 if (userManager == null)
                 {
                     userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                    return userManager.GetRoles(Id).First();
+                    return userManager.GetRoles(Id).Single();
                 }
                 else
                 {
-                    return userManager.GetRoles(Id).First();
+                    return userManager.GetRoles(Id).Single();
                 }
             }
             set
@@ -49,6 +54,12 @@ namespace TakeTwo.Models
             }
         }
 
+        public IEnumerable<SelectListItem> ShowRoles
+        {
+            get { return new SelectList(Roles1, "Id", "Name"); }
+        }
+
+        public List<IRole> Roles1 => _roles;
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
