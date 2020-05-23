@@ -18,17 +18,12 @@ namespace TakeTwo.Models
     {
         private ApplicationUserManager userManager;
 
-
         [Required]
         [Display(Name = "Name")]
         public string FullName { get; set; }
         [Required]
         [Display(Name = "Is Suspended")]
         public bool IsSuspended { get; set; }
-
-        private readonly List<IRole> _roles;
-
-
 
         //the CurrentRole property is not mapped as a field in the Users table
         //i neeed it to get the current role that the user is logged in
@@ -53,13 +48,6 @@ namespace TakeTwo.Models
                 CurrentRole = value;
             }
         }
-
-        public IEnumerable<SelectListItem> ShowRoles
-        {
-            get { return new SelectList(Roles1, "Id", "Name"); }
-        }
-
-        public List<IRole> Roles1 => _roles;
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
